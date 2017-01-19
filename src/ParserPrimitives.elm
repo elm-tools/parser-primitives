@@ -1,11 +1,12 @@
 module ParserPrimitives exposing
   ( isSubString
   , isSubChar
+  , findSubString
   )
 
 {-| Low-level functions for creating parser combinator libraries.
 
-@docs isSubString, isSubChar
+@docs isSubString, isSubChar, findSubString
 -}
 
 import Native.ParserPrimitives
@@ -88,3 +89,20 @@ isSubChar : (Char -> Bool) -> Int -> String -> Int
 isSubChar =
   Native.ParserPrimitives.isSubChar
 
+
+
+-- INDEX
+
+
+{-| Find a substring after a given offset.
+
+    findSubString "42" offset row col "Is 42 the answer?"
+        --==> (newOffset, newRow, newCol)
+
+If `offset = 0` we would get `(3, 1, 4)`
+
+If `offset = 7` we would get `(-1, 1, 18)`
+-}
+findSubString : String -> Int -> Int -> Int -> String -> (Int, Int, Int)
+findSubString =
+  Native.ParserPrimitives.findSubString
