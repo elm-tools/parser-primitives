@@ -23,7 +23,7 @@ function isSubString(smallString, offset, row, col, bigString)
 		}
 
 		// if it is a two word character
-		if (0xD800 <= char && char <= 0xDBFF)
+		if ((string.charCodeAt(offset) & 0xF800) === 0xD800)
 		{
 			i++
 			if (smallString[i] !== bigString[offset + i])
@@ -66,17 +66,17 @@ function isSubChar(predicate, offset, string)
 		return -1;
 	}
 
-	var char = string[offset];
-
-	if (char < 0xD800 || 0xDBFF < char)
+	if ((string.charCodeAt(offset) & 0xF800) === 0xD800)
 	{
-		return predicate(mkChar(char))
-			? (char === '\n' ? -2 : offset + 1)
+		return predicate(mkChar(string.substr(offset, 2)))
+			? offset + 2
 			: -1;
 	}
 
-	return predicate(mkChar(char + string[offset + 1]))
-		? offset + 2
+	var char = string[offset];
+
+	return predicate(mkChar(char))
+		? ((char === '\n') ? -2 : (offset + 1))
 		: -1;
 }
 
@@ -91,7 +91,7 @@ function findSubString(smallString, offset, row, col, bigString)
 
 	while (offset < scanTarget)
 	{
-		var char = bigString[i];
+		var char = bigString[offset];
 
 		if (char === '\n')
 		{
@@ -101,7 +101,7 @@ function findSubString(smallString, offset, row, col, bigString)
 			continue;
 		}
 
-		if (0xD800 <= char && char <= 0xDBFF)
+		if ((string.charCodeAt(offset) & 0xF800) === 0xD800)
 		{
 			offset += 2;
 			col++;
