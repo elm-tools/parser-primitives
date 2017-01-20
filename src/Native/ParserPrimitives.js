@@ -23,7 +23,7 @@ function isSubString(smallString, offset, row, col, bigString)
 		}
 
 		// if it is a two word character
-		if ((string.charCodeAt(offset) & 0xF800) === 0xD800)
+		if ((bigString.charCodeAt(offset) & 0xF800) === 0xD800)
 		{
 			i++
 			if (smallString[i] !== bigString[offset + i])
@@ -101,7 +101,7 @@ function findSubString(smallString, offset, row, col, bigString)
 			continue;
 		}
 
-		if ((string.charCodeAt(offset) & 0xF800) === 0xD800)
+		if ((bigString.charCodeAt(offset) & 0xF800) === 0xD800)
 		{
 			offset += 2;
 			col++;
