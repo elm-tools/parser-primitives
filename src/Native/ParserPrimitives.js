@@ -83,11 +83,16 @@ function isSubChar(predicate, offset, string)
 
 // FIND STRING
 
-function findSubString(smallString, offset, row, col, bigString)
+function findSubString(before, smallString, offset, row, col, bigString)
 {
 	var newOffset = bigString.indexOf(smallString, offset);
 
-	var scanTarget = (newOffset >= 0) ? newOffset : bigString.length;
+	if (newOffset === -1)
+	{
+		return tuple3(-1, row, col);
+	}
+
+	var scanTarget = before ? newOffset	: newOffset + smallString.length;
 
 	while (offset < scanTarget)
 	{
@@ -112,14 +117,14 @@ function findSubString(smallString, offset, row, col, bigString)
 		col++;
 	}
 
-	return tuple3(newOffset, row, col);
+	return tuple3(offset, row, col);
 }
 
 
 return {
 	isSubString: F5(isSubString),
 	isSubChar: F3(isSubChar),
-	findSubString: F5(findSubString)
+	findSubString: F6(findSubString)
 };
 
 }();

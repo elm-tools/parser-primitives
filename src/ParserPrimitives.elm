@@ -96,13 +96,14 @@ isSubChar =
 
 {-| Find a substring after a given offset.
 
-    findSubString "42" offset row col "Is 42 the answer?"
+    findSubString before "42" offset row col "Is 42 the answer?"
         --==> (newOffset, newRow, newCol)
 
-If `offset = 0` we would get `(3, 1, 4)`
+If `offset = 0` and `before = True` we would get `(3, 1, 4)`
+If `offset = 0` and `before = False` we would get `(5, 1, 6)`
 
 If `offset = 7` we would get `(-1, 1, 18)`
 -}
-findSubString : String -> Int -> Int -> Int -> String -> (Int, Int, Int)
+findSubString : Bool -> String -> Int -> Int -> Int -> String -> (Int, Int, Int)
 findSubString =
   Native.ParserPrimitives.findSubString
