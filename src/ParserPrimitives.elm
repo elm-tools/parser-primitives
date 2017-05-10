@@ -9,7 +9,7 @@ module ParserPrimitives exposing
 @docs isSubString, isSubChar, findSubString
 -}
 
-import Native.ParserPrimitives
+import Elm.Kernel.ParserPrimitives
 
 
 
@@ -37,7 +37,7 @@ may not be equal.
 -}
 isSubString : String -> Int -> Int -> Int -> String -> (Int, Int, Int)
 isSubString =
-  Native.ParserPrimitives.isSubString
+  Elm.Kernel.ParserPrimitives.isSubString
 
 
 
@@ -87,7 +87,7 @@ Notice that `chomp` can be tail-call optimized, so this turns into a
 -}
 isSubChar : (Char -> Bool) -> Int -> String -> Int
 isSubChar =
-  Native.ParserPrimitives.isSubChar
+  Elm.Kernel.ParserPrimitives.isSubChar
 
 
 
@@ -106,4 +106,4 @@ If `offset = 7` we would get `(-1, 1, 18)`
 -}
 findSubString : Bool -> String -> Int -> Int -> Int -> String -> (Int, Int, Int)
 findSubString =
-  Native.ParserPrimitives.findSubString
+  Elm.Kernel.ParserPrimitives.findSubString
