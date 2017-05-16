@@ -1,3 +1,8 @@
+/*
+
+import Elm.Kernel.Utils exposing (chr)
+
+*/
 
 
 // STRINGS
@@ -65,14 +70,14 @@ var _ParserPrimitives_isSubChar = F3(function(predicate, offset, string)
 
 	if ((string.charCodeAt(offset) & 0xF800) === 0xD800)
 	{
-		return predicate(_elm_lang$core$Native_Utils.chr(string.substr(offset, 2)))
+		return predicate(__Utils_chr(string.substr(offset, 2)))
 			? offset + 2
 			: -1;
 	}
 
 	var char = string[offset];
 
-	return predicate(_elm_lang$core$Native_Utils.chr(char))
+	return predicate(__Utils_chr(char))
 		? ((char === '\n') ? -2 : (offset + 1))
 		: -1;
 });
